@@ -66,7 +66,7 @@ public final class XmlUtil
                     break;
                 case '\'':
                     sb.append("&apos;");
-                    break; // Utilité à vérifier
+                    break; 
                 default:
                 	if ( c >= 128 ) {
                         sb.append("&#"+(int)c+";");
