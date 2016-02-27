@@ -37,12 +37,12 @@ public class ConsoleLoggerProvider {
 		// Create a logger for the given class
 		Logger logger = Logger.getLogger(clazz.getName()); 
 		
-		// Create a ConsoleHandler with the expected log level
-		Handler consoleHandler = new ConsoleHandler();
-		consoleHandler.setLevel(level);
-		
-		// Set the ConsoleHandler
-		logger.addHandler(consoleHandler);
+//		// Create a ConsoleHandler with the expected log level
+//		Handler consoleHandler = new ConsoleHandler();
+//		consoleHandler.setLevel(level);
+//		
+//		// Set the ConsoleHandler
+//		logger.addHandler(consoleHandler);
 		
 		// Set the log level 
 		// Level intValue() :
@@ -55,13 +55,22 @@ public class ConsoleLoggerProvider {
 		//		FINER   :  400 
 		//		FINEST  :  300 
 		//		ALL     : -2147483648
-		if ( level.intValue() >= GLOBAL_LEVEL.intValue() ) {
-			logger.setLevel(level); 
-		}
-		else {
+		Level loggerLevel = level ;
+		if ( level.intValue() < GLOBAL_LEVEL.intValue() ) {
 			// Stay at the lowest level
-			logger.setLevel(GLOBAL_LEVEL); 
+			loggerLevel = GLOBAL_LEVEL;
 		}
+		
+		// Add a new handler to be able to log CONFIG, FINE, FINER and FINEST levels
+		if ( loggerLevel.intValue() < Level.INFO.intValue() ) {
+			// Create a ConsoleHandler with the expected log level
+			Handler consoleHandler = new ConsoleHandler();
+			consoleHandler.setLevel(loggerLevel);			
+			// Set the ConsoleHandler
+			logger.addHandler(consoleHandler);
+		}
+		
+		logger.setLevel(loggerLevel);
 		
 		return logger;
 	}
