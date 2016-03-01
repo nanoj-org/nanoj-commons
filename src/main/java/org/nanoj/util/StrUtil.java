@@ -17,6 +17,53 @@ package org.nanoj.util;
 
 public class StrUtil {
 	
+    /**
+     * Split a string using the given char as separator ( simple split without "reg exp" )
+     * @param s : the string to split
+     * @param c : the separator
+     * @return : array of 'tokens' ( never null, size = 0 if the string is null, else 1 to N )
+     */
+    public static String[] split(String s, char c) {
+        if (s != null) {
+            char chars[] = s.toCharArray();
+            
+            // Count separators
+            int count = 0 ;
+            for ( int n = 0 ; n < chars.length ; n++ ) {
+                if ( chars[n] == c ) count++ ;
+            }
+            
+            if ( count > 0 ) {
+	            String[] sTokens = new String[count+1] ;
+	            int iToken = 0;
+	            int iOffset = 0 ;
+	            int iLength = 0 ;
+	            for ( int i = 0 ; i < chars.length ; i++ ) {
+	                if ( chars[i] == c ) {
+	                    //--- Create new token 
+	                    sTokens[iToken] = new String(chars, iOffset, iLength );
+	                    iToken++;
+	                    //--- Reset 
+	                    iOffset = i + 1 ;
+	                    iLength = 0 ;
+	                }
+	                else  {
+	                    iLength++;
+	                }
+	            }
+	            //--- Last Token ( current token ) 
+                sTokens[iToken] = new String(chars, iOffset, iLength );
+	            return sTokens ;
+            }
+            else {
+                //--- No separator
+                String[] ret = new String[1];
+                ret[0] = s ;
+                return ret ;
+            }
+        }
+        return new String[0]; 
+    }
 	//-------------------------------------------------------------------------------
     /**
      * Returns the given string starting by an Lower Case <br>

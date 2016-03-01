@@ -32,19 +32,27 @@ public class ConsoleLoggerProvider {
 		GLOBAL_LEVEL = level ;
 	}
 	
+	/**
+	 * Returns a logger for the given class with the default "INFO" level
+	 * @param clazz
+	 * @return
+	 */
+	public final static Logger getLogger(final Class<?> clazz) {
+		return getLogger(clazz, Level.INFO);
+	}
+	
+	/**
+	 * Returns a logger for the given class with the given level
+	 * @param clazz
+	 * @param level
+	 * @return
+	 */
 	public final static Logger getLogger(final Class<?> clazz, final Level level) {
 		
 		// Create a logger for the given class
 		Logger logger = Logger.getLogger(clazz.getName()); 
 		
-//		// Create a ConsoleHandler with the expected log level
-//		Handler consoleHandler = new ConsoleHandler();
-//		consoleHandler.setLevel(level);
-//		
-//		// Set the ConsoleHandler
-//		logger.addHandler(consoleHandler);
-		
-		// Set the log level 
+		// Set the log level (cannot be under the "GLOBAL_LEVEL" )
 		// Level intValue() :
 		//		OFF     : 2147483647
 		//		SEVERE  : 1000 
@@ -57,11 +65,11 @@ public class ConsoleLoggerProvider {
 		//		ALL     : -2147483648
 		Level loggerLevel = level ;
 		if ( level.intValue() < GLOBAL_LEVEL.intValue() ) {
-			// Stay at the lowest level
-			loggerLevel = GLOBAL_LEVEL;
+			// Stay at the GLOBAL_LEVEL
+			loggerLevel = GLOBAL_LEVEL;  // cannot be under the "GLOBAL_LEVEL"
 		}
 		
-		// Add a new handler to be able to log CONFIG, FINE, FINER and FINEST levels
+		// Add a new handler if lesser than "INFO" level to be able to log CONFIG, FINE, FINER and FINEST levels
 		if ( loggerLevel.intValue() < Level.INFO.intValue() ) {
 			// Create a ConsoleHandler with the expected log level
 			Handler consoleHandler = new ConsoleHandler();
