@@ -8,6 +8,26 @@ import org.junit.Test;
 public class StrUtilTests {
 	
 	@Test
+	public void testRemoveEnd() {
+		assertEquals("abc", StrUtil.removeEnd("abcd", "d"));
+		assertEquals("abc", StrUtil.removeEnd("abc.foo", ".foo"));
+
+		assertEquals("abc", StrUtil.removeEnd("abc", "zer"));
+		assertEquals("abc", StrUtil.removeEnd("abc", "ab"));
+
+		assertEquals("abc", StrUtil.removeEnd("abc", ""));
+		assertEquals("abc", StrUtil.removeEnd("abc", null));
+
+		assertEquals("", StrUtil.removeEnd("abc", "abc"));
+
+		assertEquals("", StrUtil.removeEnd("", "abc"));
+		assertEquals(null, StrUtil.removeEnd(null, "ee"));
+		
+		assertEquals("", StrUtil.removeEnd("", ""));
+		assertEquals(null, StrUtil.removeEnd(null, null));
+	}
+	
+	@Test
 	public void testFirstCharLowerCase() {
 		assertEquals("myClass", StrUtil.firstCharLowerCase("MyClass"));
 

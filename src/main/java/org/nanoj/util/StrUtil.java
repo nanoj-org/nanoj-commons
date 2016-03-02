@@ -82,6 +82,16 @@ public class StrUtil {
         return false ;
     }
 	//-------------------------------------------------------------------------------
+    public static String removeEnd(String str, String toBeRemoved) {
+        if ( str == null || toBeRemoved == null ) {
+            return str; 
+        }
+        if (str.endsWith(toBeRemoved)) {
+            return str.substring(0, str.length() - toBeRemoved.length());
+        }
+        return str;
+    }
+	//-------------------------------------------------------------------------------
     /**
      * Returns the given string starting by an Lower Case <br>
      * @param s
