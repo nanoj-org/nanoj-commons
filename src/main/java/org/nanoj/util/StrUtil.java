@@ -64,6 +64,23 @@ public class StrUtil {
         }
         return new String[0]; 
     }
+    //-----------------------------------------------------------------------------------
+    /**
+     * Returns true if the given String is null or void ( "", " ", "  " )
+     * @param s
+     * @return
+     */
+    public static boolean nullOrVoid(final String s) {
+        if (s == null) {
+            return true ;
+        }
+        else {
+            if ( s.trim().length() == 0 ) {
+                return true ;
+            }
+        }
+        return false ;
+    }
 	//-------------------------------------------------------------------------------
     /**
      * Returns the given string starting by an Lower Case <br>
