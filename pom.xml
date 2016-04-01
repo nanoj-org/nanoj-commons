@@ -11,7 +11,7 @@
 	<!-- ARTEFACT IDENTIFICATION -->
 	<!-- groupId is defined in the parent -->
 	<artifactId>nanoj-commons</artifactId>
-	<version>0.8.1-SNAPSHOT</version>
+	<version>0.8.1</version>
 		
 	<name>NanoJ commons</name>
 	<description>NanoJ commons and utilities classes</description>
