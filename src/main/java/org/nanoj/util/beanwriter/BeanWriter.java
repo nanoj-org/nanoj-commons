@@ -91,7 +91,7 @@ public class BeanWriter {
 	
 	/**
 	 * Converts the given string into a comment and writes it <br>
-	 * ie : "abc" is writen <!-- abc --> in XML 
+	 * ( the string is writen between XML comments ) 
 	 * @param comment
 	 */
 	public void writeComment( String comment ) 

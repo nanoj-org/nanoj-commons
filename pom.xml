@@ -5,6 +5,40 @@
 	<artifactId>nanoj-commons</artifactId>
 	<version>0.8.1-SNAPSHOT</version>
 
+	<!-- Distribution Management for Sonatype specific plugin -->
+	<!-- 
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	 -->
+	 
+	<!-- Distribution Management for the standard Maven deploy plugin (need a full distributionManagement section) -->
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+	<!-- This configuration will get the user account details to deploy to OSSRH from settings.xml file. 
+	A minimal settings with the authentication is 
+	<settings>
+	  <servers>
+	    <server>
+	      <id>ossrh</id>
+	      <username>your-jira-id</username>
+	      <password>your-jira-pwd</password>
+	    </server>
+	  </servers>
+	</settings>	
+	-->
+
 	<!-- ========== -->
 	<name>NanoJ commons</name>
 	<description>NanoJ commons and utilities classes</description>
@@ -96,6 +130,63 @@
 				</executions>
 			</plugin>
 
+			<!-- PGP signatures generation with GPG (GnuPG) : requires 'gpg' command on the system -->
+			<!-- 
+			<plugin> 
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			 -->
+
+			<plugin>
+				<groupId>org.kohsuke</groupId>
+				<artifactId>pgp-maven-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+					<secretkey>keyfile:${project.basedir}/pgp/private-key.txt</secretkey>
+					<!-- 
+					<passphrase>literal:MyPassphrase</passphrase>
+					 -->
+					<passphrase>file:${project.basedir}/pgp/passphrase.txt</passphrase>
+				</configuration>				
+				<executions>
+					<execution>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<!-- 
+			Specific plugin for deployment on Sonatype Nexus server 
+			( maven-deploy-plugin replaced with nexus-staging-maven-plugin )
+			Keep the standard maven-deploy-plugin
+			 -->
+			<!-- 
+			<plugin> 
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.3</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+			 -->
+    
 		</plugins>
 	</build>
   
