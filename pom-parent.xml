@@ -67,27 +67,6 @@
 	<build>
 		<plugins>
 
-<!-- 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>properties-maven-plugin</artifactId>
-				<version>1.0.0</version>
-				<executions>
-					<execution>
-						<phase>initialize</phase>
-						<goals>
-							<goal>read-project-properties</goal>
-						</goals>
-						<configuration>
-							<files>
-								<file>${project.basedir}/pom.properties</file>
-							</files>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
- -->
-      		
 			<plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-compiler-plugin</artifactId>
@@ -170,15 +149,14 @@
 			</plugin>
 			 -->
 
+			<!-- PGP signatures using existing keys -->
+			<!-- Removed temporarily 
 			<plugin>
 				<groupId>org.kohsuke</groupId>
 				<artifactId>pgp-maven-plugin</artifactId>
 				<version>1.1</version>
 				<configuration>
 					<secretkey>keyfile:${project.basedir}/pgp/private-key.txt</secretkey>
-					<!-- 
-					<passphrase>literal:MyPassphrase</passphrase>
-					 -->
 					<passphrase>file:${project.basedir}/pgp/passphrase.txt</passphrase>
 				</configuration>				
 				<executions>
@@ -189,6 +167,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			 -->
 			
 			<!-- 
 			Specific plugin for deployment on Sonatype Nexus server 
