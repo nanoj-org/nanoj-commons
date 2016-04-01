@@ -8,11 +8,12 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class HttpClientTest {
 
-	@Test
+	@Test @Ignore
 	public void test() {
 		
 	    try {		
