@@ -3,9 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<groupId>org.nanoj</groupId>
-	<artifactId>nanoj-parent</artifactId>
-	<version>1.0.0</version>
-	<packaging>pom</packaging>
+	
+	<!-- ========== ARTEFACT IDENTIFICATION -->
+	<artifactId>nanoj-xxxx</artifactId> <!-- PROJECT SPECIFIC -->
+	<version>xxxx</version> <!-- PROJECT SPECIFIC -->
+	
+	<name>xxxx</name> <!-- PROJECT SPECIFIC -->
+	<description>xxxxx</description> <!-- PROJECT SPECIFIC -->
+	<!-- ========== END OF ARTEFACT IDENTIFICATION -->
 
 	<!-- Distribution Management for Sonatype specific plugin -->
 	<!-- 
@@ -192,6 +197,10 @@
 	</build>
   
 	<dependencies>
+		<!-- ========== ARTEFACT SPECIFIC DEPENDENCIES -->
+		<!-- No dependencies for "commons" -->
+		<!-- ========== END OF ARTEFACT SPECIFIC DEPENDENCIES -->
+	
 		<!-- FOR TESTS -->
 		<dependency>
 			<groupId>junit</groupId>

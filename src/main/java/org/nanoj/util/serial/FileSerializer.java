@@ -54,42 +54,39 @@ public class FileSerializer
     {
         FileOutputStream  fos = null ;
         ObjectOutputStream oos = null ;
-        if ( _sFilePath == null )
-        {
+        if ( _sFilePath == null ) {
             throw new Exception("File path is null");
         }
         
-        try
-        {
+        try {
             fos = new FileOutputStream ( _sFilePath );
-        } catch (FileNotFoundException e1)
-        {
+        } 
+        catch (FileNotFoundException e1) {
             throw new Exception("Cannot create FileOutputStream", e1);
         }
         
-        try
-        {
+        try {
             oos = new ObjectOutputStream(fos);
-        } catch (IOException e2)
-        {
+        } 
+        catch (IOException e2) {
+        	fos.close();
             throw new Exception("Cannot create ObjectOutputStream", e2);
         }
 
-        try
-        {
+        try {
             //--- WRITE THE OBJECT
             oos.writeObject( obj );
             //--- Close ALL
             oos.close();
             fos.close();
-        } catch (IOException e3)
-        {
+        } 
+        catch (IOException e3) {
             throw new Exception("ObjectOutputStream cannot write object ", e3);
         }
     }
     
     /**
-     * Unserializes an object by reading the file defined by the constructor  
+     * Deserializes an object by reading the file defined by the constructor  
      * @return the object instance
      * @throws Exception
      */
@@ -98,40 +95,38 @@ public class FileSerializer
         FileInputStream   fis = null ;
         ObjectInputStream  ois = null ;
         Object obj = null ;
-        if ( _sFilePath == null )
-        {
+        if ( _sFilePath == null ) {
             throw new Exception("File path is null");
         }
         
-        try
-        {
+        try {
             fis = new FileInputStream ( _sFilePath );
-        } catch (FileNotFoundException e1)
-        {
+        } 
+        catch (FileNotFoundException e1) {
             throw new Exception("Cannot create FileInputStream", e1);
         }
         
-        try
-        {
+        try {
             ois = new ObjectInputStream(fis);
-        } catch (IOException e2)
-        {
+        } 
+        catch (IOException e2) {
+            fis.close();
             throw new Exception("Cannot create ObjectInputStream", e2);
         }
 
-        try
-        {
+        try {
             //--- READ THE OBJECT
             obj = ois.readObject();
             //--- Close ALL
             ois.close();
             fis.close();
             
-        } catch (IOException e3)
-        {
+        } 
+        catch (IOException e3) {
             throw new Exception("ObjectOutputStream cannot read object (IOException)", e3);
-        } catch (ClassNotFoundException e4)
-        {
+        } 
+        catch (ClassNotFoundException e4) {
+            ois.close();
             throw new Exception("ObjectOutputStream cannot read object (ClassNotFoundException)", e4);
         }
         

@@ -69,7 +69,7 @@ public class RecordSerializer
 	 * @param obj : the object to save
 	 * @param sKey : the key to use to identify the instance
 	 */
-	public void save( Object obj, String sKey ) //throws TelosysException
+	public void save( Object obj, String sKey ) 
 	{
 		// --- Check the object is not null
 		if (obj == null)
@@ -114,7 +114,7 @@ public class RecordSerializer
 	 * @param sKey : the key of the object to load
 	 * @return : the instance loaded, or null if not found
 	 */
-	public Object load(Class<?> cl, String sKey) //throws TelosysException
+	public Object load(Class<?> cl, String sKey) 
 	{
 		// --- Check the class is not null
 		if (cl == null)
@@ -151,8 +151,12 @@ public class RecordSerializer
 					+ sFileName + "'", e);
 		} catch (ClassNotFoundException e)
 		{
-			throw new RuntimeException(
-					"load : ClassNotFoundException - file ='" + sFileName + "'",
+			try {
+				fis.close();
+			} catch (IOException e1) {
+				// Nothing to do here 
+			}
+			throw new RuntimeException("load : ClassNotFoundException - file ='" + sFileName + "'",
 					e);
 		}
 		return obj;
