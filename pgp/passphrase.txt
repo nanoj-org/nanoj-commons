@@ -1,1 +1,1 @@
-NanoJ-commons passphrase
+NanoJ framework passphrase
