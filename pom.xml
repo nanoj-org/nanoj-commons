@@ -156,6 +156,7 @@
 
 			<!-- PGP signatures using existing keys -->
 			<!-- Removed temporarily 
+			 -->
 			<plugin>
 				<groupId>org.kohsuke</groupId>
 				<artifactId>pgp-maven-plugin</artifactId>
@@ -172,7 +173,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			 -->
 			
 			<!-- 
 			Specific plugin for deployment on Sonatype Nexus server 
