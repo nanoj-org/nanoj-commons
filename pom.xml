@@ -112,12 +112,18 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
                 <version>3.0.0</version>
+                <!-- 
+				<configuration>
+					<skip>true</skip>
+				</configuration>                
+                -->
 				<executions>
 					<execution>
 						<id>attach-sources</id>
 						<goals>
 							<goal>jar</goal>
 						</goals>
+						<!-- <phase>deploy</phase> --> <!-- Phase changed -->
 					</execution>
 				</executions>
 			</plugin>
@@ -126,12 +132,18 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.10.3</version>
+                <!-- 
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+                -->
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
 						<goals>
 							<goal>jar</goal>
 						</goals>
+						<!-- <phase>deploy</phase>  --> <!-- Phase changed -->
 					</execution>
 				</executions>
 			</plugin>
@@ -162,14 +174,20 @@
 				<artifactId>pgp-maven-plugin</artifactId>
 				<version>1.1</version>
 				<configuration>
+					<skip>${skip-pgp}</skip>
+				<!-- 
 					<secretkey>keyfile:${project.basedir}/pgp/private-key.txt</secretkey>
 					<passphrase>file:${project.basedir}/pgp/passphrase.txt</passphrase>
+				 -->
+					<secretkey>keyfile:${secretkey-file}</secretkey>
+					<passphrase>file:${passphrase-file}</passphrase>
 				</configuration>				
 				<executions>
 					<execution>
 						<goals>
 							<goal>sign</goal>
 						</goals>
+						<!-- <phase>deploy</phase>  --> <!-- Phase changed -->
 					</execution>
 				</executions>
 			</plugin>
