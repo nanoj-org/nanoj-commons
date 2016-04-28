@@ -6,7 +6,7 @@
 	
 	<!-- ========== ARTEFACT IDENTIFICATION -->
 	<artifactId>nanoj-commons</artifactId> <!-- PROJECT SPECIFIC -->
-	<version>0.8.1</version> <!-- PROJECT SPECIFIC -->
+	<version>0.8.3</version> <!-- PROJECT SPECIFIC -->
 	
 	<name>NanoJ commons</name> <!-- PROJECT SPECIFIC -->
 	<description>NanoJ commons and utilities classes</description> <!-- PROJECT SPECIFIC -->
@@ -210,7 +210,32 @@
 				</configuration>
 			</plugin>
 			 -->
-    
+			<plugin>
+		        <groupId>org.sonatype.plugins</groupId>
+		        <artifactId>nexus-staging-maven-plugin</artifactId>
+		        <version>1.6.7</version> <!-- Last stable version / 2016 May -->
+		        <extensions>true</extensions>
+		        <configuration>
+		          <!-- The server "id" element from settings to use authentication from -->
+		          <serverId>ossrh</serverId>
+		          <!-- nexusUrl = The Base URL of Nexus instance where we want to stage -->
+		          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+		          <description>${project.artifactId}-${project.version}</description>
+		        </configuration>
+		        <!-- 
+		        <executions>
+		          <execution>
+		            <id>deploy-to-sonatype</id>
+		            <phase>deploy</phase>
+		            <goals>
+		              <goal>deploy</goal>
+		              <goal>release</goal>
+		            </goals>
+		          </execution>
+		        </executions>
+		         -->
+		    </plugin>
+		        
 		</plugins>
 	</build>
   
