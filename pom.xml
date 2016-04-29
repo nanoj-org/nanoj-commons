@@ -12,17 +12,7 @@
 	<description>NanoJ commons and utilities classes</description> <!-- PROJECT SPECIFIC -->
 	<!-- ========== END OF ARTEFACT IDENTIFICATION -->
 
-	<!-- Distribution Management for Sonatype specific plugin -->
-	<!-- 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
-	 -->
-	 
-	<!-- Distribution Management for the standard Maven deploy plugin (need a full distributionManagement section) -->
+	<!-- Distribution Management configuration (used by the deploy plugin) -->
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
@@ -167,18 +157,12 @@
 			 -->
 
 			<!-- PGP signatures using existing keys -->
-			<!-- Removed temporarily 
-			 -->
 			<plugin>
 				<groupId>org.kohsuke</groupId>
 				<artifactId>pgp-maven-plugin</artifactId>
 				<version>1.1</version>
 				<configuration>
 					<skip>${skip-pgp}</skip>
-				<!-- 
-					<secretkey>keyfile:${project.basedir}/pgp/private-key.txt</secretkey>
-					<passphrase>file:${project.basedir}/pgp/passphrase.txt</passphrase>
-				 -->
 					<secretkey>keyfile:${secretkey-file}</secretkey>
 					<passphrase>file:${passphrase-file}</passphrase>
 				</configuration>				
@@ -187,7 +171,6 @@
 						<goals>
 							<goal>sign</goal>
 						</goals>
-						<!-- <phase>deploy</phase>  --> <!-- Phase changed -->
 					</execution>
 				</executions>
 			</plugin>
@@ -208,6 +191,16 @@
 					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 					<autoReleaseAfterClose>true</autoReleaseAfterClose>
 				</configuration>
+		        <executions>
+		          <execution>
+		            <id>deploy-to-sonatype</id>
+		            <phase>deploy</phase>
+		            <goals>
+		              <goal>deploy</goal>
+		              <goal>release</goal>
+		            </goals>
+		          </execution>
+		        </executions>
 			</plugin>
 			 -->
 			<plugin>
@@ -222,18 +215,6 @@
 		          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
 		          <description>${project.artifactId}-${project.version}</description>
 		        </configuration>
-		        <!-- 
-		        <executions>
-		          <execution>
-		            <id>deploy-to-sonatype</id>
-		            <phase>deploy</phase>
-		            <goals>
-		              <goal>deploy</goal>
-		              <goal>release</goal>
-		            </goals>
-		          </execution>
-		        </executions>
-		         -->
 		    </plugin>
 		        
 		</plugins>
